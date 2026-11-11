@@ -27,9 +27,9 @@
   --spacing-navbar: 64px;
 
   /* Border Radius */
-  --radius-card:   12px;
-  --radius-button: 8px;
-  --radius-badge:  4px;
+  --radius-card:   16px;
+  --radius-button: 9999px;
+  --radius-badge:  6px;
 }
 
 /* ─── Base Reset & Globals ─────────────────────────────────────────────────── */
@@ -37,8 +37,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
@@ -52,6 +50,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-text-main);
   line-height: 1.6;
+  margin: 0;
 }
 
 #root {
@@ -68,18 +67,8 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-border);
-  border-radius: 3px;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-muted);
-}
-
-/* ─── Drawer slide-in animation ─────────────────────────────────────────────── */
-@keyframes slideInFromLeft {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(0); }
-}
-
-.drawer-enter {
-  animation: slideInFromLeft 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

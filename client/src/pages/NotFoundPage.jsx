@@ -2,29 +2,28 @@ import { Link } from 'react-router-dom'
 
 function NotFoundPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4
-                    bg-[var(--color-background)] text-center">
-      <p className="text-6xl mb-4">🏔️</p>
-      <h1
-        className="text-4xl font-bold text-[var(--color-text-main)] mb-2"
-        style={{ fontFamily: 'var(--font-display)' }}
-      >
-        Trail Not Found
-      </h1>
-      <p className="text-[var(--color-text-muted)] mb-8 max-w-sm">
-        Looks like you&apos;ve wandered off the path. This page doesn&apos;t exist.
-      </p>
-      <Link
-        to="/"
-        className="px-6 py-2.5 rounded-lg bg-[var(--color-primary)] text-white
-                   font-semibold hover:bg-[var(--color-primary-light)]
-                   transition-colors duration-150"
-      >
-        Back to Base Camp
-      </Link>
+    <div className="min-h-[70vh] flex flex-col items-center justify-center px-4 py-20 text-center">
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-10 max-w-md w-full flex flex-col items-center">
+        <p className="text-6xl mb-4">🏔️</p>
+        <h1
+          className="text-3xl font-extrabold text-gray-900 mb-2"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
+          Trail Not Found
+        </h1>
+        <p className="text-sm text-[var(--color-text-muted)] mb-8">
+          Looks like you&apos;ve wandered off the ridge. This page doesn&apos;t exist.
+        </p>
+        <Link
+          to="/"
+          className="px-7 py-3.5 rounded-full bg-[var(--color-primary)] text-white text-sm font-bold
+                     shadow-sm hover:brightness-110 active:scale-95 transition-all duration-300"
+        >
+          Back to Base Camp
+        </Link>
+      </div>
     </div>
   )
 }
 
 export default NotFoundPage
-

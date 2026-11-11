@@ -1,286 +1,279 @@
 import { Link } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import useCartStore from '../store/cartStore'
+import { formatPHP, FREE_SHIPPING_THRESHOLD } from '../utils/format'
+import ProductMedia from '../components/ProductMedia'
 
-function formatPHP(amount) {
-  return `₱ ${new Intl.NumberFormat('en-PH', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(amount)}`
-}
-
-/* ─── Icons ──────────────────────────────────────────────────────────────── */
 function IconTrash() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
-      fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-      strokeLinejoin="round" aria-hidden="true">
-      <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-      <path d="M10 11v6"/><path d="M14 11v6"/>
-      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+      fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="3 6 5 6 21 6" />
+      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+      <path d="M10 11v6" />
+      <path d="M14 11v6" />
     </svg>
   )
 }
 
 function IconShield() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
-      fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-      strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
     </svg>
   )
 }
 
-/* ─── Empty state ────────────────────────────────────────────────────────── */
 function EmptyCart() {
   return (
     <div className="max-w-md mx-auto py-24 flex flex-col items-center text-center px-4">
-      {/* Illustrated empty pack */}
-      <div className="w-28 h-28 rounded-full bg-[var(--color-surface-muted)]
-                      flex items-center justify-center mb-6">
-        <svg width="64" height="64" viewBox="0 0 72 72" fill="none" aria-hidden="true">
-          <rect x="18" y="24" width="36" height="38" rx="5"
-            fill="var(--color-primary)" fillOpacity=".1" stroke="var(--color-primary)"
-            strokeWidth="1.8"/>
-          <path d="M27 24 Q27 12 36 12 Q45 12 45 24"
-            fill="none" stroke="var(--color-primary)" strokeWidth="1.8"/>
-        </svg>
+      <div className="w-24 h-24 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-4xl mb-6">
+        🎒
       </div>
-      <h2 className="text-xl font-bold text-[var(--color-text-main)] mb-2"
-          style={{ fontFamily: 'var(--font-display)' }}>
+      <h1
+        className="text-2xl font-extrabold text-gray-900 mb-2"
+        style={{ fontFamily: 'var(--font-display)' }}
+      >
         Your pack is empty
-      </h2>
+      </h1>
       <p className="text-sm text-[var(--color-text-muted)] mb-8 leading-relaxed">
-        No gear loaded yet. Browse the catalog and add some essentials before your next
-        Philippine summit.
+        No gear loaded yet. Browse the catalog and pack essentials for your next Philippine climb.
       </p>
-      <Link to="/shop"
-        className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm
-                   bg-[var(--color-primary)] text-white
-                   hover:bg-[var(--color-primary-light)] transition-colors duration-150">
+      <Link
+        to="/shop"
+        className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm
+                   bg-[var(--color-primary)] text-white shadow-sm
+                   hover:brightness-110 hover:shadow-md active:scale-95 transition-all duration-300"
+      >
         Browse Gear →
       </Link>
     </div>
   )
 }
 
-/* ─── Line item ──────────────────────────────────────────────────────────── */
-function CartItem({ item }) {
-  const { removeItem, updateQuantity } = useCartStore()
-  const isClothes = item.category === 'clothes'
-
+function CartItem({ item, removeItem, updateQuantity }) {
   return (
-    <li className="flex gap-4 p-4 bg-[var(--color-surface)]
-                   rounded-xl border border-[var(--color-border)]">
-      {/* Thumbnail placeholder */}
-      <div className="w-20 h-20 shrink-0 rounded-lg bg-[var(--color-surface-muted)]
-                      flex items-center justify-center overflow-hidden">
-        <svg width="36" height="36" viewBox="0 0 72 72" fill="none" aria-hidden="true">
-          {isClothes ? (
-            <path d="M22 10 L9 24 L18 28 L18 60 H54 V28 L63 24 L50 10 L41 18 H31 L22 10Z"
-              fill="var(--color-primary)" fillOpacity=".2" stroke="var(--color-primary)"
-              strokeWidth="2" strokeLinejoin="round"/>
-          ) : (
-            <>
-              <rect x="18" y="24" width="36" height="38" rx="5"
-                fill="var(--color-primary)" fillOpacity=".2"
-                stroke="var(--color-primary)" strokeWidth="2"/>
-              <path d="M27 24 Q27 12 36 12 Q45 12 45 24"
-                fill="none" stroke="var(--color-primary)" strokeWidth="2"/>
-            </>
-          )}
-        </svg>
+    <motion.li
+      layout
+      initial={{ opacity: 0, y: 12, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.85, height: 0, marginBottom: 0, overflow: 'hidden' }}
+      transition={{ duration: 0.25 }}
+      className="flex gap-4 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm"
+    >
+      <div className="w-24 h-28 shrink-0 rounded-xl overflow-hidden bg-[var(--color-surface-muted)]">
+        <ProductMedia src={item.imageSrc} alt={item.title} category={item.category} iconSize={44} />
       </div>
 
-      {/* Info */}
-      <div className="flex-1 min-w-0">
-        <Link to={`/product/${item.id}`}
-          className="font-semibold text-sm text-[var(--color-text-main)] leading-snug
-                     hover:text-[var(--color-primary)] transition-colors duration-150 line-clamp-2">
+      <div className="flex-1 min-w-0 flex flex-col">
+        <Link
+          to={`/product/${item.id}`}
+          className="font-bold text-base text-gray-900 leading-snug hover:text-[var(--color-primary)] transition-colors line-clamp-2"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
           {item.title}
         </Link>
 
-        {/* Variants */}
-        <div className="flex flex-wrap gap-2 mt-1.5">
-          {item.color && (
-            <span className="text-[10px] px-2 py-0.5 rounded bg-[var(--color-surface-muted)]
-                             text-[var(--color-text-muted)] font-medium">
-              {item.color}
-            </span>
-          )}
-          {item.size && (
-            <span className="text-[10px] px-2 py-0.5 rounded bg-[var(--color-surface-muted)]
-                             text-[var(--color-text-muted)] font-medium">
-              Size {item.size}
-            </span>
-          )}
-        </div>
+        {(item.color || item.size) && (
+          <div className="flex flex-wrap gap-1.5 mt-1.5">
+            {item.color && (
+              <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 font-semibold">
+                {item.color}
+              </span>
+            )}
+            {item.size && (
+              <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 font-semibold">
+                Size {item.size}
+              </span>
+            )}
+          </div>
+        )}
 
-        {/* Price (mobile) */}
-        <p className="text-sm font-bold text-[var(--color-primary)] mt-2 sm:hidden">
-          {formatPHP(item.price * item.quantity)}
-        </p>
-
-        {/* Qty + remove row */}
-        <div className="flex items-center gap-3 mt-3">
-          <div className="flex items-center rounded-lg border border-[var(--color-border)]
-                          bg-[var(--color-surface-muted)] text-sm">
-            <button type="button"
+        <div className="mt-auto pt-3 flex flex-wrap items-center justify-between gap-3">
+          <div className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-1">
+            <button
+              type="button"
               onClick={() => updateQuantity(item._key, item.quantity - 1)}
-              className="w-8 h-8 flex items-center justify-center text-[var(--color-text-muted)]
-                         hover:text-[var(--color-primary)] transition-colors duration-150"
-              aria-label="Decrease quantity">
+              className="w-8 h-8 rounded-full flex items-center justify-center text-gray-600 hover:bg-white hover:text-[var(--color-primary)] font-bold active:scale-95 transition-all"
+              aria-label="Decrease quantity"
+            >
               −
             </button>
-            <span className="w-6 text-center font-semibold text-[var(--color-text-main)]">
-              {item.quantity}
-            </span>
-            <button type="button"
+            <span className="w-7 text-center text-sm font-extrabold text-gray-900">{item.quantity}</span>
+            <button
+              type="button"
               onClick={() => updateQuantity(item._key, item.quantity + 1)}
-              className="w-8 h-8 flex items-center justify-center text-[var(--color-text-muted)]
-                         hover:text-[var(--color-primary)] transition-colors duration-150"
-              aria-label="Increase quantity">
+              className="w-8 h-8 rounded-full flex items-center justify-center text-gray-600 hover:bg-white hover:text-[var(--color-primary)] font-bold active:scale-95 transition-all"
+              aria-label="Increase quantity"
+            >
               +
             </button>
           </div>
 
-          <button type="button"
+          <p className="text-lg font-extrabold text-[var(--color-primary)] sm:hidden">
+            {formatPHP(item.price * item.quantity)}
+          </p>
+
+          <button
+            type="button"
             onClick={() => removeItem(item._key)}
-            className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]
-                       hover:text-[var(--color-error)] transition-colors duration-150"
-            aria-label={`Remove ${item.title}`}>
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-gray-500
+                       hover:text-[var(--color-error)] hover:bg-red-50 transition-colors"
+            aria-label={`Remove ${item.title}`}
+          >
             <IconTrash />
             Remove
           </button>
         </div>
       </div>
 
-      {/* Price (desktop) */}
-      <p className="hidden sm:block font-bold text-sm text-[var(--color-primary)] shrink-0 pt-0.5">
+      <p className="hidden sm:block text-lg font-extrabold text-[var(--color-primary)] shrink-0 pt-0.5">
         {formatPHP(item.price * item.quantity)}
       </p>
-    </li>
+    </motion.li>
   )
 }
 
-/* ─── CartPage ───────────────────────────────────────────────────────────── */
 function CartPage() {
-  const { items, subtotal, clearCart } = useCartStore()
+  const { items, removeItem, updateQuantity, subtotal, clearCart } = useCartStore()
 
   if (items.length === 0) return <EmptyCart />
 
-  const sub   = subtotal()
-  const ship  = sub >= 2000 ? 0 : 150        // Free shipping over ₱ 2,000
+  const sub = subtotal()
+  const ship = sub >= FREE_SHIPPING_THRESHOLD ? 0 : 150
   const total = sub + ship
-
-  const freeShipRemaining = 2000 - sub
+  const freeShipRemaining = Math.max(0, FREE_SHIPPING_THRESHOLD - sub)
+  const itemCount = items.reduce((s, i) => s + i.quantity, 0)
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
-      {/* Header */}
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-28 lg:pb-12">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[var(--color-text-main)]"
-            style={{ fontFamily: 'var(--font-display)' }}>
-          Your Cart
-          <span className="ml-2 text-base font-normal text-[var(--color-text-muted)]">
-            ({items.reduce((s, i) => s + i.quantity, 0)} item{items.reduce((s, i) => s + i.quantity, 0) !== 1 ? 's' : ''})
-          </span>
-        </h1>
-        <button type="button" onClick={clearCart}
-          className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-error)]
-                     transition-colors duration-150">
-          Clear all
+        <div>
+          <h1
+            className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            Your Cart
+          </h1>
+          <p className="text-sm text-[var(--color-text-muted)] mt-0.5">
+            {itemCount} item{itemCount !== 1 ? 's' : ''} in your trail pack
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={clearCart}
+          className="px-4 py-2 rounded-full border border-gray-200 bg-white text-xs font-bold text-gray-600
+                     hover:text-[var(--color-error)] hover:border-red-200 active:scale-95 transition-all"
+        >
+          Clear All
         </button>
       </div>
 
       {/* Free shipping progress */}
-      {freeShipRemaining > 0 && (
-        <div className="mb-6 p-4 rounded-xl bg-[var(--color-surface)]
-                        border border-[var(--color-border)]">
-          <p className="text-sm text-[var(--color-text-muted)] mb-2">
-            Add{' '}
-            <span className="font-bold text-[var(--color-primary)]">
-              {formatPHP(freeShipRemaining)}
-            </span>{' '}
-            more for free Metro Manila shipping
-          </p>
-          <div className="h-1.5 bg-[var(--color-surface-muted)] rounded-full overflow-hidden">
-            <div
-              className="h-full bg-[var(--color-primary)] rounded-full transition-all duration-500"
-              style={{ width: `${Math.min(100, (sub / 2000) * 100).toFixed(1)}%` }}
-            />
-          </div>
+      <div className="mb-6 p-4 rounded-2xl bg-white border border-gray-200 shadow-sm">
+        <p className="text-sm text-gray-700 font-medium mb-2">
+          {freeShipRemaining > 0 ? (
+            <>
+              Add <span className="font-extrabold text-[var(--color-primary)]">{formatPHP(freeShipRemaining)}</span> more for free Metro Manila shipping
+            </>
+          ) : (
+            <span className="font-bold text-[var(--color-success)]">
+              You qualify for free Metro Manila shipping!
+            </span>
+          )}
+        </p>
+        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-[var(--color-primary)] rounded-full"
+            initial={{ width: 0 }}
+            animate={{ width: `${Math.min(100, (sub / FREE_SHIPPING_THRESHOLD) * 100)}%` }}
+            transition={{ duration: 0.4 }}
+          />
         </div>
-      )}
+      </div>
 
-      {ship === 0 && (
-        <div className="mb-6 p-3 rounded-xl bg-emerald-50 border border-emerald-200
-                        flex items-center gap-2 text-sm font-semibold text-emerald-700">
-          <span className="text-base">🎉</span>
-          You qualify for free Metro Manila shipping!
-        </div>
-      )}
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-
-        {/* Cart items */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+        {/* Animated Cart List */}
         <div className="lg:col-span-2">
-          <ul className="flex flex-col gap-3">
-            {items.map((item) => <CartItem key={item._key} item={item} />)}
+          <ul className="flex flex-col gap-3.5">
+            <AnimatePresence mode="popLayout">
+              {items.map((item) => (
+                <CartItem
+                  key={item._key}
+                  item={item}
+                  removeItem={removeItem}
+                  updateQuantity={updateQuantity}
+                />
+              ))}
+            </AnimatePresence>
           </ul>
         </div>
 
-        {/* Order summary */}
+        {/* Sticky Order Summary */}
         <div className="lg:col-span-1">
-          <div className="sticky top-20 bg-[var(--color-surface)] rounded-2xl
-                          border border-[var(--color-border)] p-5 flex flex-col gap-4">
-            <h2 className="font-bold text-[var(--color-text-main)]"
-                style={{ fontFamily: 'var(--font-display)' }}>
+          <div className="sticky top-24 bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex flex-col gap-4">
+            <h2
+              className="text-lg font-extrabold text-gray-900"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
               Order Summary
             </h2>
 
-            <div className="flex flex-col gap-2.5 text-sm">
-              <div className="flex justify-between text-[var(--color-text-muted)]">
+            <div className="flex flex-col gap-3 text-sm">
+              <div className="flex justify-between text-gray-600">
                 <span>Subtotal</span>
-                <span className="font-medium text-[var(--color-text-main)]">{formatPHP(sub)}</span>
+                <span className="font-bold text-gray-900">{formatPHP(sub)}</span>
               </div>
-              <div className="flex justify-between text-[var(--color-text-muted)]">
-                <span>Shipping</span>
-                <span className={ship === 0 ? 'font-semibold text-[var(--color-success)]' : 'font-medium text-[var(--color-text-main)]'}>
+              <div className="flex justify-between text-gray-600">
+                <span>Estimated Shipping</span>
+                <span className={ship === 0 ? 'font-bold text-[var(--color-success)]' : 'font-bold text-gray-900'}>
                   {ship === 0 ? 'Free' : formatPHP(ship)}
                 </span>
               </div>
-              <div className="h-px bg-[var(--color-border)]" />
-              <div className="flex justify-between font-bold text-base">
-                <span className="text-[var(--color-text-main)]">Total</span>
-                <span className="text-[var(--color-primary)]">{formatPHP(total)}</span>
+              <div className="h-px bg-gray-100" />
+              <div className="flex justify-between items-baseline">
+                <span className="font-bold text-gray-900">Total</span>
+                <span className="text-2xl font-extrabold text-[var(--color-primary)]">{formatPHP(total)}</span>
               </div>
             </div>
 
-            {/* CTA */}
-            <button type="button"
-              className="w-full py-4 rounded-xl font-bold text-sm
-                         bg-[var(--color-accent)] text-white
-                         hover:bg-[var(--color-accent-light)] active:scale-[0.98]
-                         transition-all duration-150">
+            <Link
+              to="/checkout"
+              className="w-full py-4 rounded-full font-bold text-sm text-center bg-[var(--color-accent)] text-white
+                         shadow-sm hover:brightness-110 hover:shadow-md active:scale-95 transition-all duration-300"
+            >
               Proceed to Checkout →
-            </button>
+            </Link>
 
-            <Link to="/shop"
-              className="text-center text-sm font-medium text-[var(--color-text-muted)]
-                         hover:text-[var(--color-primary)] transition-colors duration-150">
+            <Link
+              to="/shop"
+              className="text-center text-sm font-semibold text-gray-500 hover:text-[var(--color-primary)] transition-colors"
+            >
               ← Continue Shopping
             </Link>
 
-            {/* Trust micro-copy */}
-            <div className="flex items-center justify-center gap-1.5 text-xs
-                            text-[var(--color-text-muted)] mt-1">
+            <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 pt-1">
               <IconShield />
               Secure checkout · GCash & PayMaya coming soon
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Prominent sticky mobile checkout bar */}
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex items-center justify-between gap-4">
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-wider text-gray-500">Total</p>
+          <p className="text-lg font-extrabold text-[var(--color-primary)]">{formatPHP(total)}</p>
+        </div>
+        <Link
+          to="/checkout"
+          className="px-7 py-3 rounded-full bg-[var(--color-accent)] text-white text-sm font-bold
+                     shadow-sm hover:brightness-110 active:scale-95 transition-all duration-300"
+        >
+          Checkout →
+        </Link>
       </div>
     </div>
   )

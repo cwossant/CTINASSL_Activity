@@ -1,7 +1,10 @@
 /**
  * Shared product catalog data — single source of truth for mock products.
- * Both ShopPage and ProductDetailPage import from here.
+ * Includes Philippine hiking gear & apparel with technical specs and multi-angle images.
  */
+
+export const HERO_IMAGE =
+  'https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1800&q=80'
 
 export const ALL_PRODUCTS = [
   {
@@ -10,13 +13,29 @@ export const ALL_PRODUCTS = [
     price: 7995,
     category: 'clothes',
     badges: ['Waterproof', 'Ultralight'],
-    weight: 285,          // grams
-    waterproofRating: 20000, // mm
+    weight: 285,
+    waterproofRating: 20000,
     material: 'Gore-Tex Pro 3L',
+    imageSrc:
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=1000&q=80',
+        label: 'Front Shell View',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?auto=format&fit=crop&w=1000&q=80',
+        label: 'Ridge Weather Test',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80',
+        label: 'Alpine Condition Field Shot',
+      },
+    ],
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { label: 'Forest Olive', hex: '#4A5D23' },
-      { label: 'Slate Gray',   hex: '#708090' },
+      { label: 'Slate Gray', hex: '#708090' },
       { label: 'Burnt Orange', hex: '#C8460A' },
     ],
     stock: 18,
@@ -41,10 +60,26 @@ export const ALL_PRODUCTS = [
     weight: 190,
     waterproofRating: null,
     material: '100% New Zealand Merino 185 gsm',
+    imageSrc:
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=80',
+        label: 'Base Layer Fit',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=1000&q=80',
+        label: 'Trail Layering',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80',
+        label: 'Cold Summit Wear',
+      },
+    ],
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { label: 'Natural Ecru', hex: '#F5F0E8' },
-      { label: 'Charcoal',     hex: '#3D3D3D' },
+      { label: 'Charcoal', hex: '#3D3D3D' },
       { label: 'Forest Green', hex: '#2D5A27' },
     ],
     stock: 34,
@@ -68,10 +103,26 @@ export const ALL_PRODUCTS = [
     weight: 420,
     waterproofRating: 5000,
     material: 'Polartec Power Stretch Pro',
+    imageSrc:
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1000&q=80',
+        label: 'Mid-Layer Profile',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=crop&w=1000&q=80',
+        label: 'Ridgeline Wind Test',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80',
+        label: 'Pre-Dawn Ascent',
+      },
+    ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
-      { label: 'Gunmetal',   hex: '#4A4A4A' },
-      { label: 'Cobalt',     hex: '#1A56A8' },
+      { label: 'Gunmetal', hex: '#4A4A4A' },
+      { label: 'Cobalt', hex: '#1A56A8' },
     ],
     stock: 22,
     description:
@@ -94,11 +145,27 @@ export const ALL_PRODUCTS = [
     weight: 155,
     waterproofRating: null,
     material: 'Nylon-Polyester blend, UPF 50+',
+    imageSrc:
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=1000&q=80',
+        label: 'Breathable Weave',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1000&q=80',
+        label: 'Open Ridge Sun',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=1000&q=80',
+        label: 'Active Mobility',
+      },
+    ],
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { label: 'Desert Sand', hex: '#C2A97A' },
-      { label: 'Sky Blue',    hex: '#6EB0D6' },
-      { label: 'White',       hex: '#F8F8F8' },
+      { label: 'Sky Blue', hex: '#6EB0D6' },
+      { label: 'White', hex: '#F8F8F8' },
     ],
     stock: 50,
     description:
@@ -120,10 +187,26 @@ export const ALL_PRODUCTS = [
     weight: 890,
     waterproofRating: 10000,
     material: 'Dyneema Composite Hybrid + 210D ripstop nylon',
+    imageSrc:
+      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=80',
+        label: 'Pack Profile',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=1000&q=80',
+        label: 'Trail Carry',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1622260614153-03223fb72052?auto=format&fit=crop&w=1000&q=80',
+        label: 'Harness & Compression',
+      },
+    ],
     sizes: ['One Size'],
     colors: [
       { label: 'Ranger Green', hex: '#3B4A2F' },
-      { label: 'Black',        hex: '#1A1A1A' },
+      { label: 'Black', hex: '#1A1A1A' },
     ],
     stock: 9,
     description:
@@ -146,6 +229,22 @@ export const ALL_PRODUCTS = [
     weight: 68,
     waterproofRating: null,
     material: 'Grade 1 Titanium',
+    imageSrc:
+      'https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1000&q=80',
+        label: 'Camp Brew Setup',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1000&q=80',
+        label: 'Basecamp Essential',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1000&q=80',
+        label: 'Morning Trail Stove',
+      },
+    ],
     sizes: ['One Size'],
     colors: [{ label: 'Raw Titanium', hex: '#B2B4B8' }],
     stock: 60,
@@ -169,10 +268,26 @@ export const ALL_PRODUCTS = [
     weight: 440,
     waterproofRating: null,
     material: '100% 3K Carbon Fibre',
+    imageSrc:
+      'https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=1000&q=80',
+        label: 'Steep Descent Support',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80',
+        label: 'Cordillera Scree Trail',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1000&q=80',
+        label: 'Foldable Storage',
+      },
+    ],
     sizes: ['One Size'],
     colors: [
       { label: 'Carbon Black', hex: '#2A2A2A' },
-      { label: 'Carbon Grey',  hex: '#5C5C5C' },
+      { label: 'Carbon Grey', hex: '#5C5C5C' },
     ],
     stock: 15,
     description:
@@ -196,10 +311,26 @@ export const ALL_PRODUCTS = [
     weight: 120,
     waterproofRating: null,
     material: '210D Ripstop TPU-laminated nylon',
+    imageSrc:
+      'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1000&q=80',
+        label: 'Camp Storage',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=80',
+        label: 'Pack Liner Setup',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1000&q=80',
+        label: 'Monsoon Protection',
+      },
+    ],
     sizes: ['One Size'],
     colors: [
       { label: 'Signal Orange', hex: '#E05020' },
-      { label: 'Cobalt Blue',   hex: '#1E4A9A' },
+      { label: 'Cobalt Blue', hex: '#1E4A9A' },
     ],
     stock: 40,
     description:
@@ -219,4 +350,3 @@ export const ALL_PRODUCTS = [
 export function getProductById(id) {
   return ALL_PRODUCTS.find((p) => p.id === id) ?? null
 }
-
