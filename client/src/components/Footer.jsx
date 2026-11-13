@@ -23,10 +23,10 @@ const FOOTER_COLUMNS = [
   {
     title: 'Customer Care',
     links: [
+      { label: 'Track My Orders', to: '/orders' },
       { label: 'Metro Manila Free Delivery', to: '/cart' },
       { label: 'Provincial LBC Shipping', to: '/checkout' },
       { label: '14-Day Trail Guarantee', to: '/shop' },
-      { label: 'Gear Care & Sizing', to: '/shop' },
     ],
   },
 ]

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import useCartStore from '../store/cartStore'
+import useOrderStore from '../store/orderStore'
 
 function IconCart() {
   return (
@@ -64,6 +65,9 @@ function Navbar() {
   const location = useLocation()
   const totalItems = useCartStore((state) => state.totalItems())
   const openCartDrawer = useCartStore((state) => state.openDrawer)
+  const activeOrdersCount = useOrderStore((state) =>
+    state.orders.filter((o) => ['to_pack', 'to_ship', 'to_deliver'].includes(o.status)).length,
+  )
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
 
@@ -158,12 +162,30 @@ function Navbar() {
                 [
                   'px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300',
                   isActive
-                    ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/10'
+                    ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/10 font-bold'
                     : 'text-gray-700 hover:text-[var(--color-primary-light)] hover:bg-gray-100/80',
                 ].join(' ')
               }
             >
               Cart
+            </NavLink>
+            <NavLink
+              to="/orders"
+              className={({ isActive }) =>
+                [
+                  'relative px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 flex items-center gap-1.5',
+                  isActive
+                    ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/10 font-bold'
+                    : 'text-gray-700 hover:text-[var(--color-primary-light)] hover:bg-gray-100/80',
+                ].join(' ')
+              }
+            >
+              <span>Orders</span>
+              {activeOrdersCount > 0 && (
+                <span className="px-1.5 py-0.2 rounded-full text-[10px] font-extrabold bg-amber-500 text-white leading-none">
+                  {activeOrdersCount}
+                </span>
+              )}
             </NavLink>
           </nav>
 
@@ -311,6 +333,26 @@ function Navbar() {
                   {totalItems > 0 && (
                     <span className="inline-flex items-center justify-center min-w-[24px] h-6 px-2 bg-[var(--color-accent)] text-white text-xs font-bold rounded-full">
                       {totalItems}
+                    </span>
+                  )}
+                </NavLink>
+
+                <NavLink
+                  to="/orders"
+                  onClick={closeDrawer}
+                  className={({ isActive }) =>
+                    [
+                      'flex items-center justify-between px-4 py-3 text-base font-semibold rounded-full transition-all duration-200',
+                      isActive
+                        ? 'bg-[var(--color-primary)] text-white shadow-sm'
+                        : 'text-gray-800 hover:bg-gray-100 hover:text-[var(--color-primary)]',
+                    ].join(' ')
+                  }
+                >
+                  <span>My Orders</span>
+                  {activeOrdersCount > 0 && (
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 bg-amber-500 text-white text-xs font-extrabold rounded-full">
+                      {activeOrdersCount} active
                     </span>
                   )}
                 </NavLink>

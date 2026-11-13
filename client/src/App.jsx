@@ -5,6 +5,7 @@ import ShopPage from './pages/ShopPage'
 import ProductDetailPage from './pages/ProductDetailPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
+import OrdersPage from './pages/OrdersPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>

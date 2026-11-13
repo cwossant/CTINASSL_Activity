@@ -344,6 +344,289 @@ export const ALL_PRODUCTS = [
       { label: 'Activity', value: 'Backpacking, River Crossing' },
     ],
   },
+  {
+    id: 'prod-009',
+    title: '2-Person Ultralight Backpacking Tent — 15D Silnylon',
+    price: 9450,
+    category: 'gear',
+    badges: ['Waterproof', 'Ultralight'],
+    weight: 1180,
+    waterproofRating: 3000,
+    material: '15D Ripstop Silnylon PU3000mm',
+    imageSrc:
+      'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1000&q=80',
+        label: 'Summit Pitch',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1000&q=80',
+        label: 'Vestibule Setup',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1000&q=80',
+        label: 'Monsoon Wind Test',
+      },
+    ],
+    sizes: ['2 Person'],
+    colors: [
+      { label: 'Pine Green', hex: '#2E4C23' },
+      { label: 'Sunrise Gold', hex: '#D49B28' },
+    ],
+    stock: 12,
+    description:
+      'Dual-vestibule, freestanding 3-season shelter engineered to resist heavy rainfall and high-elevation winds on Mt. Pulag and Mt. Apo. High-ceiling geometry with reflective guy lines and DAC aluminum poles.',
+    specs: [
+      { label: 'Weight', value: '1,180 g (trail weight)' },
+      { label: 'Capacity', value: '2 Persons' },
+      { label: 'Waterproof Rating', value: '3,000 mm (Fly & Tub)' },
+      { label: 'Poles', value: 'DAC Featherlite NSL 8.5mm' },
+      { label: 'Packed Size', value: '40 x 12 cm' },
+      { label: 'Activity', value: 'Thru-Hiking, Alpine Camp' },
+    ],
+  },
+  {
+    id: 'prod-010',
+    title: 'Cordillera Quick-Dry Convertible Trail Pants',
+    price: 2450,
+    category: 'clothes',
+    badges: ['Breathable', 'UV Protect'],
+    weight: 295,
+    waterproofRating: null,
+    material: '4-Way Stretch DWR Nylon',
+    imageSrc:
+      'https://images.unsplash.com/photo-1552902865-b72c031ac5ea?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1552902865-b72c031ac5ea?auto=format&fit=crop&w=1000&q=80',
+        label: 'Trail Fit Front',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=1000&q=80',
+        label: 'Climbing Mobility',
+      },
+    ],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [
+      { label: 'Earth Khaki', hex: '#8B7D6B' },
+      { label: 'Granite Slate', hex: '#4A4E53' },
+    ],
+    stock: 24,
+    description:
+      'Converts from full-length pants to trail shorts in seconds via concealed leg zippers. Water-repellent DWR finish sheds light mud and mist, with reinforced seat and knee panels designed for Luzon jungle scrambles.',
+    specs: [
+      { label: 'Weight', value: '295 g' },
+      { label: 'Sun Protection', value: 'UPF 50+' },
+      { label: 'Pockets', value: '6 Cargo & Zippered Pockets' },
+      { label: 'Material', value: '92% Nylon, 8% Spandex with DWR' },
+      { label: 'Activity', value: 'Trekking, River Trek' },
+    ],
+  },
+  {
+    id: 'prod-011',
+    title: '800-Lumen Rechargeable LED Headlamp — IPX8',
+    price: 1950,
+    category: 'gear',
+    badges: ['Waterproof', 'Ultralight'],
+    weight: 78,
+    waterproofRating: 10000,
+    material: 'Anodized Aero Aluminum + Elastic Band',
+    imageSrc:
+      'https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1508873696983-2df5293cb395?auto=format&fit=crop&w=1000&q=80',
+        label: 'Night Trek Beam',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1000&q=80',
+        label: 'Camp Lighting',
+      },
+    ],
+    sizes: ['One Size'],
+    colors: [
+      { label: 'Matte Black', hex: '#1C1C1C' },
+      { label: 'Signal Orange', hex: '#D35400' },
+    ],
+    stock: 35,
+    description:
+      'Critical summit dawn-assault illumination with dual white flood/spot and red night-vision LEDs. USB-C fast charging with 45-hour runtime on eco mode and IPX8 waterproofing for torrential monsoon downpours.',
+    specs: [
+      { label: 'Weight', value: '78 g (with battery)' },
+      { label: 'Max Output', value: '800 Lumens' },
+      { label: 'Beam Distance', value: '120 meters' },
+      { label: 'Battery', value: '1,800mAh Li-ion USB-C' },
+      { label: 'Waterproof', value: 'IPX8 (2m submersible)' },
+      { label: 'Activity', value: 'Dawn Summit, Night Trek' },
+    ],
+  },
+  {
+    id: 'prod-012',
+    title: '850FP Hydrophobic Down Summit Sleeping Bag (0°C)',
+    price: 8850,
+    category: 'gear',
+    badges: ['Ultralight', 'Windproof'],
+    weight: 680,
+    waterproofRating: null,
+    material: '10D Toray Ripstop Nylon + 850FP Down',
+    imageSrc:
+      'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1000&q=80',
+        label: 'Bivy Camp Setup',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1000&q=80',
+        label: 'Packed Size Compression',
+      },
+    ],
+    sizes: ['Regular (up to 183cm)', 'Long (up to 198cm)'],
+    colors: [
+      { label: 'Rust Clay', hex: '#B85435' },
+      { label: 'Forest Green', hex: '#2E4C23' },
+    ],
+    stock: 14,
+    description:
+      'Sub-700g cold-campsite essential for Mt. Pulag summit freezes. Treated hydrophobic down resists tropical mist and condensation while compressing to the size of a water bottle in your pack.',
+    specs: [
+      { label: 'Weight', value: '680 g' },
+      { label: 'Comfort Temp', value: '0°C (Limit -4°C)' },
+      { label: 'Insulation', value: '850FP Hydrophobic Goose Down' },
+      { label: 'Packed Size', value: '28 x 14 cm' },
+      { label: 'Activity', value: 'Pulag Cold Camp, High Alpine' },
+    ],
+  },
+  {
+    id: 'prod-013',
+    title: 'Cushioned Merino Wool Trail Socks (2-Pack)',
+    price: 780,
+    category: 'clothes',
+    badges: ['Merino', 'Breathable'],
+    weight: 80,
+    waterproofRating: null,
+    material: '72% Australian Merino, 24% Nylon, 4% Lycra',
+    imageSrc:
+      'https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=1000&q=80',
+        label: 'Trail Pair View',
+      },
+    ],
+    sizes: ['S (35-38)', 'M (39-42)', 'L (43-46)'],
+    colors: [
+      { label: 'Heather Pine', hex: '#3B5336' },
+      { label: 'Oatmeal Taupe', hex: '#A89F91' },
+    ],
+    stock: 50,
+    description:
+      'Seamless toe construction prevents hot spots and trail blisters during steep Cordillera descents. Naturally odor-resistant wool retains warmth even when soaked from river crossings.',
+    specs: [
+      { label: 'Weight', value: '80 g / pair' },
+      { label: 'Cushioning', value: 'Medium Density Underfoot' },
+      { label: 'Fabric', value: '72% Merino, 24% Nylon, 4% Lycra' },
+      { label: 'Activity', value: 'Multi-Day Trek, Thru-Hike' },
+    ],
+  },
+  {
+    id: 'prod-014',
+    title: '2.5L Insulated Trail Hydration Reservoir',
+    price: 1450,
+    category: 'gear',
+    badges: ['Ultralight'],
+    weight: 145,
+    waterproofRating: null,
+    material: 'BPA-Free TPU + Thermal Neoprene Sleeve',
+    imageSrc:
+      'https://images.unsplash.com/photo-1517865288-978fcb780652?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1517865288-978fcb780652?auto=format&fit=crop&w=1000&q=80',
+        label: 'Reservoir Setup',
+      },
+    ],
+    sizes: ['2.5 L'],
+    colors: [{ label: 'Glacier Blue', hex: '#5DADE2' }],
+    stock: 30,
+    description:
+      'Wide-mouth slide-seal opening for easy ice loading and stream refills. Anti-microbial, taste-free TPU bladder with bite valve shut-off and insulated hose covering for tropical humidity.',
+    specs: [
+      { label: 'Weight', value: '145 g' },
+      { label: 'Capacity', value: '2.5 Liters' },
+      { label: 'Hose Length', value: '100 cm insulated' },
+      { label: 'Valve', value: 'High-Flow 360° Surge Valve' },
+      { label: 'Activity', value: 'Trail Running, Mountain Trek' },
+    ],
+  },
+  {
+    id: 'prod-015',
+    title: 'Mt. Pulag Summit Badge Technical Trail Tee',
+    price: 950,
+    category: 'clothes',
+    badges: ['Breathable', 'UV Protect'],
+    weight: 135,
+    waterproofRating: null,
+    material: '100% Recycled Poly Micro-Waffle',
+    imageSrc:
+      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1000&q=80',
+        label: 'Front Elevation Graphic',
+      },
+    ],
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    colors: [
+      { label: 'Terracotta Earth', hex: '#B85D36' },
+      { label: 'Deep Moss', hex: '#2D4428' },
+    ],
+    stock: 45,
+    description:
+      'Lightweight technical running and hiking shirt with moisture-wicking micro-waffle fabric. UPF 40+ sun shielding with Philippine highland topographic elevation print on the back.',
+    specs: [
+      { label: 'Weight', value: '135 g' },
+      { label: 'Sun Shield', value: 'UPF 40+' },
+      { label: 'Fabric', value: 'Recycled Micro-Waffle Poly' },
+      { label: 'Fit', value: 'Athletic Trail Cut' },
+      { label: 'Activity', value: 'Hiking, Trail Run, Everyday' },
+    ],
+  },
+  {
+    id: 'prod-016',
+    title: 'Titanium Ultralight Isobutane Backpacking Stove',
+    price: 1650,
+    category: 'gear',
+    badges: ['Ultralight', 'Windproof'],
+    weight: 48,
+    waterproofRating: null,
+    material: 'Grade TA1 Titanium Alloy + Brass Valve',
+    imageSrc:
+      'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=900&q=80',
+    gallery: [
+      {
+        src: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1000&q=80',
+        label: 'Pocket Size Scale',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1517865288-978fcb780652?auto=format&fit=crop&w=1000&q=80',
+        label: 'Camp Boil Test',
+      },
+    ],
+    sizes: ['One Size'],
+    colors: [{ label: 'Titanium Gray', hex: '#777A80' }],
+    stock: 28,
+    description:
+      'Pocket-sized 48g titan stove engineered with a concave burner head to resist ridge winds without extra windshields. Boils 500ml water in 2 minutes 45 seconds for hot summit camp coffee.',
+    specs: [
+      { label: 'Weight', value: '48 g' },
+      { label: 'Output', value: '2,700 Watts (9,200 BTU)' },
+      { label: 'Boil Time', value: '2m 45s (500ml water)' },
+      { label: 'Compatibility', value: 'Standard Lindal EN417 Canisters' },
+      { label: 'Activity', value: 'Ultralight Fastpacking, Camp Cooking' },
+    ],
+  },
 ]
 
 /** Look up a single product by ID. */

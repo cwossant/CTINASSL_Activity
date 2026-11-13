@@ -58,9 +58,11 @@ CTINASSL_Activity/
 │       │   ├── ProductDetailPage.jsx # Multi-angle gallery, color/size selection, specs table
 │       │   ├── CartPage.jsx     # Dedicated full cart review with quantity toggles
 │       │   ├── CheckoutPage.jsx # 3-Step stepper: Address -> Shipping -> Payment -> Success
+│       │   ├── OrdersPage.jsx   # Live order tracking panel (To Pack, To Ship, To Deliver, Delivered)
 │       │   └── NotFoundPage.jsx # 404 trail marker page
 │       ├── store/
-│       │   └── cartStore.js     # Zustand state with localStorage persistence (`ahon-cart`)
+│       │   ├── cartStore.js     # Zustand cart state with localStorage persistence (`ahon-cart`)
+│       │   └── orderStore.js    # Zustand orders state with localStorage persistence (`ahon-orders`)
 │       └── utils/
 │           └── format.js        # Currency formatter (₱ PHP) and badge style maps
 │
@@ -156,7 +158,21 @@ This is Windows PowerShell's default security policy blocking `.ps1` files. Fix 
 - **Step 3 (Payment):** Select Cash on Delivery (COD) or mock digital payments (GCash / Maya).
 - Placing the order automatically clears the cart and triggers a celebration screen.
 
-### 3. Responsive Design & Visuals
+### 3. Orders Panel & Live Status Tracking
+- Located at [client/src/pages/OrdersPage.jsx](file:///client/src/pages/OrdersPage.jsx) (`/orders`).
+- Backed by [client/src/store/orderStore.js](file:///client/src/store/orderStore.js) with `localStorage` persistence (`'ahon-orders'`).
+- Live tracking lifecycle tabs:
+  - 📦 **To Pack:** Order verified, being packed and weighed at Ahon Ridge Warehouse.
+  - 🚚 **To Ship:** Sealed and dispatched to courier sorting hub (LBC, J&T, Flash Express).
+  - 🛵 **To Deliver:** Out for delivery with rider to your doorstep.
+  - ✅ **Delivered:** Order received and completed.
+- Features:
+  - Stepper progress bar with animated active pulsing indicators.
+  - Waybill / tracking number, courier info, and estimated delivery dates.
+  - Order search bar (by order number, courier, or item title).
+  - Interactive status simulator button (`Simulate Status ⏩`) to easily test and watch orders move across each stage in real time!
+
+### 4. Responsive Design & Visuals
 - Styled entirely with **Tailwind CSS v4** design tokens in [client/src/index.css](file:///client/src/index.css).
 - Mobile-first drawer navigation and quick-cart drawer ([client/src/components/CartDrawer.jsx](file:///client/src/components/CartDrawer.jsx)).
 - Route transitions handled smoothly by **Framer Motion** wrapped in [client/src/components/Layout.jsx](file:///client/src/components/Layout.jsx).

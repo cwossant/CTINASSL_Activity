@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import useCartStore from '../store/cartStore'
+import useOrderStore from '../store/orderStore'
 import { formatPHP } from '../utils/format'
 import ProductMedia from '../components/ProductMedia'
 import CustomSelect from '../components/CustomSelect'
@@ -199,6 +200,8 @@ function CheckoutPage() {
   const [delivery, setDelivery] = useState('metro')
   const [paymentMethod, setPaymentMethod] = useState('cod')
   const [orderPlaced, setOrderPlaced] = useState(false)
+  const [createdOrder, setCreatedOrder] = useState(null)
+  const addOrder = useOrderStore((state) => state.addOrder)
 
   const [shipping, setShipping] = useState({
     firstName: '',
@@ -225,8 +228,51 @@ function CheckoutPage() {
   const total = sub + deliveryOption.price
 
   const handlePlaceOrder = () => {
+    const paymentLabels = {
+      cod: 'Cash on Delivery (COD)',
+      gcash: 'GCash',
+      paymaya: 'Maya',
+      card: 'Credit / Debit Card',
+    }
+
+    const orderData = {
+      shippingAddress: shipping,
+      deliveryMethod: delivery,
+      deliveryMethodLabel: deliveryOption.label,
+      paymentMethod: paymentLabels[paymentMethod] || 'Cash on Delivery (COD)',
+      items: items.map((i) => ({
+        id: i.id,
+        title: i.title,
+        price: i.price,
+        quantity: i.quantity,
+        size: i.size || null,
+        color: i.color || null,
+        imageSrc: i.imageSrc,
+        category: i.category,
+      })),
+      subtotal: sub,
+      shippingFee: deliveryOption.price,
+      totalAmount: total,
+    }
+
+    const created = addOrder(orderData)
+    setCreatedOrder(created)
     setOrderPlaced(true)
     clearCart()
+
+    // Sync with backend API if accessible
+    try {
+      fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: orderData.items,
+          shippingAddress: orderData.shippingAddress,
+          deliveryMethod: delivery,
+          paymentMethod: paymentMethod,
+        }),
+      }).catch(() => {})
+    } catch (_e) {}
   }
 
   if (orderPlaced) {
@@ -236,7 +282,7 @@ function CheckoutPage() {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-          className="bg-white rounded-3xl border border-gray-200 shadow-lg p-10 flex flex-col items-center"
+          className="bg-white rounded-3xl border border-gray-200 shadow-lg p-8 sm:p-10 flex flex-col items-center"
         >
           <div className="w-20 h-20 rounded-full bg-emerald-100 text-[var(--color-success)] flex items-center justify-center mb-6">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -254,18 +300,34 @@ function CheckoutPage() {
           >
             Pack Confirmed!
           </h1>
+          {createdOrder && (
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 border border-amber-200 rounded-full text-xs font-bold text-amber-800 mb-3">
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+              <span>Order #{createdOrder.id} · Status: To Pack</span>
+            </div>
+          )}
           <p className="text-sm text-gray-600 mb-6 leading-relaxed">
             Thank you, <span className="font-bold text-gray-900">{shipping.firstName || 'Trail Climber'}</span>.
-            Your Ahon Outdoors order is queued for dispatch via{' '}
+            Your Ahon Outdoors order is queued for warehouse packing and dispatch via{' '}
             <span className="font-semibold">{deliveryOption.label}</span>.
           </p>
-          <Link
-            to="/shop"
-            className="px-8 py-3.5 rounded-full bg-[var(--color-primary)] text-white text-sm font-bold
-                       shadow-sm hover:brightness-110 active:scale-95 transition-all duration-300"
-          >
-            Back to Shop
-          </Link>
+
+          <div className="flex flex-col sm:flex-row gap-3 w-full">
+            <Link
+              to="/orders"
+              className="flex-1 py-3.5 px-6 rounded-full bg-[var(--color-primary)] text-white text-sm font-bold
+                         shadow-sm hover:brightness-110 active:scale-95 transition-all duration-300 text-center"
+            >
+              Track in Orders Panel →
+            </Link>
+            <Link
+              to="/shop"
+              className="py-3.5 px-6 rounded-full border border-gray-200 text-gray-700 text-sm font-bold
+                         hover:bg-gray-50 active:scale-95 transition-all duration-300 text-center"
+            >
+              Back to Shop
+            </Link>
+          </div>
         </motion.div>
       </div>
     )

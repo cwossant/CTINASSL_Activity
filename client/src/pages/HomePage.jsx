@@ -141,7 +141,7 @@ function HomePage() {
                        border border-white/20 bg-white/10 backdrop-blur-md"
           >
             <span className="w-2 h-2 rounded-full bg-[var(--color-accent-light)] animate-pulse" />
-            Tested on Mt. Pulag & Mt. Apo
+            Built for mountains
           </span>
 
           <h1
