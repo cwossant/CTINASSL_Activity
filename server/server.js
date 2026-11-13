@@ -1,7 +1,15 @@
+require('dotenv').config();
+if (!process.env.MONGO_URI) {
+  const path = require('path')
+  const serverEnvPath = path.resolve(__dirname, '.env')
+  if (path.resolve(process.cwd(), '.env') !== serverEnvPath) {
+    require('dotenv').config({ path: serverEnvPath })
+  }
+}
+
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
-const dotenv = require('dotenv')
 
 const connectDB = require('./config/db')
 const sendResponse = require('./utils/sendResponse')
@@ -10,8 +18,6 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware')
 const authRoutes = require('./routes/authRoutes')
 const productRoutes = require('./routes/productRoutes')
 const orderRoutes = require('./routes/orderRoutes')
-
-dotenv.config()
 
 const app = express()
 

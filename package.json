@@ -1,0 +1,15 @@
+{
+  "name": "ahon-outdoors",
+  "version": "1.0.0",
+  "description": "Ahon Outdoors - Philippine Hiking Gear & Outdoor Apparel E-Commerce Platform",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix client run dev",
+    "client": "npm --prefix client run dev",
+    "server": "npm --prefix server run dev",
+    "seed": "npm --prefix server run seed",
+    "build": "npm --prefix client run build",
+    "lint": "npm --prefix client run lint"
+  }
+}
+
